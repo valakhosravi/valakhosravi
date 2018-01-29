@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Cell } from '../classes/cell';
+
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-matrix',
@@ -7,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
         <table id="parse-table">
             <tbody>
                 <tr *ngFor="let list of matrix">
-                    <td *ngFor="let element of list" class="cell {{element.class}}" (click)="element[method] ()">
+                    <td *ngFor="let element of list" class="{{element.class}}" id="{{element.id}}">
                         {{element.title}}
                     </td>
                 </tr>
@@ -34,9 +37,8 @@ import { Component, OnInit } from '@angular/core';
             -ms-user-select: none;
             user-select: none;
         }
-        .cell-selectable {
-            color: red;
-            cursor: pointer;
+        .cell-red {
+            color: #f44336;
             text-align: center;
             width: 20px;
             height: 20px;
@@ -45,15 +47,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MatrixComponent implements OnInit {
 
-    matrix: {
-        title: string,
-        class: string,
-        method?: Function,
-    }[][];
+    matrix: Cell[][];
 
     constructor() { }
 
-    ngOnInit() {
+    public ngOnInit() {
         this.matrix = [];
         const length = 16;
         for (let i = 0; i < length; i++) {
@@ -61,24 +59,15 @@ export class MatrixComponent implements OnInit {
             for (let j = 0; j < length; j++) {
                 this.matrix[i].push({
                     title: this.randomChar(),
-                    class: '',
+                    class: 'cell',
                 });
             }
         }
 
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 35; i++) {
             this.generateRandomMatrix(i);
         }
         this.insertReservedWords();
-    }
-
-    public showSkills() {
-        for (let i = 0; i < this.matrix.length; i++) {
-            this.matrix[0][i] = {
-                title: 'x',
-                class: 'cell-selectable',
-            };
-        }
     }
 
     private generateRandomMatrix(interval: number) {
@@ -86,10 +75,12 @@ export class MatrixComponent implements OnInit {
             const length = 16;
             for (let i = 0; i < length; i++) {
                 for (let j = 0; j < length; j++) {
-                    this.matrix[i][j] = {
-                        title: this.randomChar(),
-                        class: '',
-                    };
+                    if (this.matrix[i][j].class !== 'cell-red') {
+                        this.matrix[i][j] = {
+                            title: this.randomChar(),
+                            class: 'cell',
+                        };
+                    }
                 }
             }
         }, interval * 100);
@@ -101,38 +92,81 @@ export class MatrixComponent implements OnInit {
                 {
                     title: 'VALA KHOSRAVI',
                     number: 0,
+                    id: 'vala-khosravi',
                 },
                 {
                     title: 'SKILLS',
                     number: 5,
-                    method: this.showSkills
+                    id: 'skills',
                 },
                 {
                     title: 'ABOUT',
                     number: 1,
+                    id: 'about',
                 },
                 {
-                    title: 'CONTACT ME',
-                    number: 6,
+                  title: 'CONTACT ME',
+                  number: 6,
+                  id: 'contact-me',
                 },
-            ];
+              ];
 
             reservedWords.forEach((rw, index) => {
                 for (let i = 0; i < rw.title.length; i++) {
                     setTimeout(() => {
                         this.matrix[index * 4][rw.number + i] = {
                             title: rw.title[i],
-                            class: 'cell-selectable',
+                            class: 'cell-red',
+                            id: rw.id,
                         };
+                        this.assignCellMethods();
                     }, i * 100);
                 }
             });
-        }, 2000);
+          }, 2000);
     }
 
     private randomChar(): string {
         const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         const character = possible.charAt(Math.floor(Math.random() * possible.length));
         return character;
+    }
+
+    private assignCellMethods() {
+        const that = this;
+        $(document).ready(
+            function() {
+                // skills click
+                $('.cell-red').each(
+                    function(index, element){
+                        if ($(element).attr('id') === 'skills') {
+                            $(element).click(
+                                function() {
+                                    const title = 'SKILLS';
+                                    title.split('').forEach((element, index) => {
+                                        setTimeout(() => {
+                                            that.matrix[0][index] = {
+                                                  title: element,
+                                                  class: 'cell-red',
+                                                  id: 'skills-back',
+                                              };
+                                        }, index * 100);
+                                    });
+                                    for (let i = title.length; i < 16; i++) {
+                                      setTimeout(() => {
+                                        that.matrix[0][i] = {
+                                                title: that.randomChar(),
+                                                class: 'cell',
+                                                id: '',
+                                            };
+                                        }, i * 100);
+                                    }
+                                }
+                            );
+                        }
+                    }
+                );
+            }
+      );
     }
 }
