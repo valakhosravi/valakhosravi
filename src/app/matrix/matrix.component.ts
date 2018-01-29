@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
         <table id="parse-table">
             <tbody>
                 <tr *ngFor="let list of matrix">
-                    <td *ngFor="let element of list" class="cell" [style.color]="element.color">
+                    <td *ngFor="let element of list" class="cell {{element.class}}" (click)="element[method] ()">
                         {{element.title}}
                     </td>
                 </tr>
@@ -21,8 +21,22 @@ import { Component, OnInit } from '@angular/core';
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            border: 2px solid white;
+            padding: 10px;
         }
         .cell {
+            text-align: center;
+            width: 20px;
+            height: 20px;
+            color: white;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .cell-selectable {
+            color: red;
+            cursor: pointer;
             text-align: center;
             width: 20px;
             height: 20px;
@@ -32,43 +46,91 @@ import { Component, OnInit } from '@angular/core';
 export class MatrixComponent implements OnInit {
 
     matrix: {
-      title: string,
-      color: string
+        title: string,
+        class: string,
+        method?: Function,
     }[][];
 
-    constructor() {}
+    constructor() { }
 
     ngOnInit() {
-        const length = 16;
         this.matrix = [];
+        const length = 16;
         for (let i = 0; i < length; i++) {
             this.matrix[i] = [];
             for (let j = 0; j < length; j++) {
                 this.matrix[i].push({
-                  title: this.randomChar(),
-                  color: 'black',
+                    title: this.randomChar(),
+                    class: '',
                 });
             }
+        }
+
+        for (let i = 0; i < 20; i++) {
+            this.generateRandomMatrix(i);
         }
         this.insertReservedWords();
     }
 
-    private insertReservedWords() {
-        const reservedWords = [
-            'VALA',
-            'KHOSRAVI',
-        ];
-        reservedWords.forEach((rw, index) => {
-            for (let i = 0; i < rw.length; i++) {
-                this.matrix[index][i] = {
-                    title: rw[i],
-                    color: 'red',
-                };
-            }
-        });
+    public showSkills() {
+        for (let i = 0; i < this.matrix.length; i++) {
+            this.matrix[0][i] = {
+                title: 'x',
+                class: 'cell-selectable',
+            };
+        }
     }
 
-    private randomChar() {
+    private generateRandomMatrix(interval: number) {
+        setTimeout(() => {
+            const length = 16;
+            for (let i = 0; i < length; i++) {
+                for (let j = 0; j < length; j++) {
+                    this.matrix[i][j] = {
+                        title: this.randomChar(),
+                        class: '',
+                    };
+                }
+            }
+        }, interval * 100);
+    }
+
+    private insertReservedWords() {
+        setTimeout(() => {
+            const reservedWords = [
+                {
+                    title: 'VALA KHOSRAVI',
+                    number: 0,
+                },
+                {
+                    title: 'SKILLS',
+                    number: 5,
+                    method: this.showSkills
+                },
+                {
+                    title: 'ABOUT',
+                    number: 1,
+                },
+                {
+                    title: 'CONTACT ME',
+                    number: 6,
+                },
+            ];
+
+            reservedWords.forEach((rw, index) => {
+                for (let i = 0; i < rw.title.length; i++) {
+                    setTimeout(() => {
+                        this.matrix[index * 4][rw.number + i] = {
+                            title: rw.title[i],
+                            class: 'cell-selectable',
+                        };
+                    }, i * 100);
+                }
+            });
+        }, 2000);
+    }
+
+    private randomChar(): string {
         const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         const character = possible.charAt(Math.floor(Math.random() * possible.length));
         return character;

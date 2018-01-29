@@ -4,7 +4,7 @@ import { Input } from '@angular/core';
 @Component({
     selector: 'app-section',
     template: `
-        <div [ngStyle]="styleMode">
+        <div [ngStyle]="styleMode" style="background-color: black">
             <ng-content></ng-content>
         </div>
     `,
