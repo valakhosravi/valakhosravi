@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
         <table id="parse-table">
             <tbody>
                 <tr *ngFor="let list of matrix">
-                    <td *ngFor="let element of list" class="cell {{element.class}}" (click)="element[method] ()">
+                    <td *ngFor="let element of list" class="cell {{element.class}}" (click)="element[showSkills] ()">
                         {{element.title}}
                     </td>
                 </tr>
@@ -101,19 +101,22 @@ export class MatrixComponent implements OnInit {
                 {
                     title: 'VALA KHOSRAVI',
                     number: 0,
+                    method: this.showSkills,
                 },
                 {
                     title: 'SKILLS',
                     number: 5,
-                    method: this.showSkills
+                    method: this.showSkills,
                 },
                 {
                     title: 'ABOUT',
                     number: 1,
+                    method: this.showSkills,
                 },
                 {
                     title: 'CONTACT ME',
                     number: 6,
+                    method: this.showSkills,
                 },
             ];
 
@@ -124,6 +127,9 @@ export class MatrixComponent implements OnInit {
                             title: rw.title[i],
                             class: 'cell-selectable',
                         };
+                        if (rw.method) {
+                            this.matrix[index * 4][rw.number + i].method = rw.method;
+                        }
                     }, i * 100);
                 }
             });
