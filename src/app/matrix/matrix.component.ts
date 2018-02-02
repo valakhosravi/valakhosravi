@@ -11,7 +11,6 @@ import * as $ from 'jquery';
             <div class="middle">
                 <div class="inner">
                     <div id="control">
-                        ⟵
                     </div>
                 </div>
             </div>
@@ -27,29 +26,12 @@ import * as $ from 'jquery';
                 </tbody>
             </table>
         </div>
+        <app-footer></app-footer>
     </div>
     `,
     styles: [`
         #control {
             cursor: pointer;
-        }
-        .outter {
-            width: 100%;
-            color: white;
-            height: 10vh;
-            display: table;
-        }
-        .middle {
-            width: 100%;
-            display: table-cell;
-            vertical-align: middle;
-        }
-        .inner {
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
-            vertical-align: middle;
-            width: 40px;
         }
         .container {
             position: absolute;

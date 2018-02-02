@@ -6,7 +6,9 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './pages/home.page/home-page/home-page.component';
 import { SectionComponent } from './components/section/section.component';
 import { MatrixComponent } from './matrix/matrix.component';
+import { FooterComponent } from './footer/footer.component';
 
+import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 
 @NgModule({
   declarations: [
@@ -14,9 +16,11 @@ import { MatrixComponent } from './matrix/matrix.component';
     HomePageComponent,
     SectionComponent,
     MatrixComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
+    Angular2FontawesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
