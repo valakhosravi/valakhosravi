@@ -61,7 +61,7 @@ import { Component, OnInit } from '@angular/core';
             text-decoration: none;
         }
         .contact-cell a:hover {
-            color: #f44336;
+            color: #72F7AA;
             background-color: transparent;
             text-decoration: underline;
         }
