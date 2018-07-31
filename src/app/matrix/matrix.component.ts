@@ -31,6 +31,7 @@ import * as $ from 'jquery';
             </table>
             <input *ngIf="emailStatus" type="email" class="email-input">
         </div>
+        <a href="assets/vala-khosravi-cv.pdf" download="vala-khosravi-cv">Download</a>
         <app-footer></app-footer>
     </div>
     `,
