@@ -8,7 +8,7 @@ import { SectionComponent } from './components/section/section.component';
 import { MatrixComponent } from './matrix/matrix.component';
 import { FooterComponent } from './footer/footer.component';
 
-import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
+// import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
@@ -22,7 +22,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
   ],
   imports: [
     BrowserModule,
-    Angular2FontawesomeModule,
+    // Angular2FontawesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
