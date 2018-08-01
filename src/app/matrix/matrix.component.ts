@@ -295,29 +295,105 @@ export class MatrixComponent implements OnInit {
     }
 
     public onContactMeClick(that: any) {
-        const reservedWords = [
+        this.emailStatus = false;
+        const titles = [
             {
-                title: '[        ]SUBMIT',
-                number: 0,
-                id: 'contact-me',
+                title: '<BACK',
             },
+            {
+                title: 'TELEPHONE:',
+                lines: [
+                    '+989379221661',
+                ]
+            },
+            {
+                title: 'GMAIL:',
+                lines: [
+                    'VALAKHOSRAVI0',
+                ]
+            },
+            {
+                title: 'GMAIL:',
+                lines: [
+                    'VALAKHOSRAVI0',
+                ]
+            },
+            {
+                title: 'ADDRESS:',
+                lines: [
+                    'IRAN-TEHRAN',
+                    'GHEYTARIEH-SABA',
+                    'FATEMIEH-7THMEHR',
+                ]
+            }
         ];
-        reservedWords.forEach((rw, index) => {
-            for (let i = 0; i < rw.title.length; i++) {
+        for (let i = 0; i < 16; i++) {
+            for (let j = 0; j < 16; j++) {
                 setTimeout(() => {
-                    this.matrix[12][rw.number + i] = {
-                        title: rw.title[i],
-                        class: 'cell-red',
-                        id: rw.id,
+                    that.matrix[j][i] = {
+                        title: that.randomChar(),
+                        class: 'cell',
+                        id: '',
                     };
                 }, i * 100);
             }
-        });
+        }
+        for (let i = 0; i < titles.length; i++) {
+            titles[i].title.split('').forEach((element, index) => {
+                setTimeout(() => {
+                    that.matrix[i * 3][index] = {
+                        title: element,
+                        class: 'cell-red skills-cell-' + i,
+                        id: 'skills-back-' + i,
+                    };
+                }, index * 100);
+            });
+            if (titles[i].lines) {
+                titles[i].lines.forEach((line, jndex) => {
+                    line.split('').forEach((element, index) => {
+                        setTimeout(() => {
+                            // console.log(index);
+                            that.matrix[i * 3 + 1 + jndex][index] = {
+                                title: element,
+                                class: 'cell-red skills-cell-' + i,
+                                id: 'skills-back-' + i,
+                            };
+                        }, index * 100);
+                    });
+                });
+            }
+        }
+        // titles.forEach((t, row) => {
+        //     t.split('').forEach((element, index) => {
+        //         setTimeout(() => {
+        //             that.matrix[row * 3][index] = {
+        //                 title: element,
+        //                 class: 'cell-red skills-cell-' + row,
+        //                 id: 'skills-back-' + row,
+        //             };
+        //             that.matrix[row * 3][index] = {
+        //                 title: element,
+        //                 class: 'cell-red skills-cell-' + row,
+        //                 id: 'skills-back-' + row,
+        //             };
+        //         }, index * 100);
+        //     });
+        // });
         setTimeout(() => {
-            this.emailStatus = true;
-            setTimeout(() => {
-                $('.email-input')[0].focus();
-            }, 100);
-        }, 900);
+            $('.skills-cell-' + 0).click(() => {
+                for (let i = 0; i < 16; i++) {
+                    for (let j = 0; j < 16; j++) {
+                        setTimeout(() => {
+                            that.matrix[j][i] = {
+                                title: that.randomChar(),
+                                class: 'cell',
+                                id: '',
+                            };
+                        }, i * 100);
+                    }
+                }
+                this.insertReservedWords(false);
+            });
+        }, 1500);
     }
 }
