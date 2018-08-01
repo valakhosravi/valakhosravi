@@ -31,7 +31,6 @@ import * as $ from 'jquery';
             </table>
             <input *ngIf="emailStatus" type="email" class="email-input">
         </div>
-        <a href="assets/vala-khosravi-cv.pdf" download="vala-khosravi-cv">Download</a>
         <app-footer></app-footer>
     </div>
     `,
@@ -219,6 +218,11 @@ export class MatrixComponent implements OnInit {
                 $('.skills').click(
                     function () {
                         that.onSkillsClick(that);
+                    }
+                );
+                $('.download-cv').click(
+                    function () {
+                        window.location.href = 'assets/vala-khosravi-cv.pdf';
                     }
                 );
                 $('.contact-me').click(
