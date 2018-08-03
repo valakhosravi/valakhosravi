@@ -313,12 +313,6 @@ export class MatrixComponent implements OnInit {
                 ]
             },
             {
-                title: 'GMAIL:',
-                lines: [
-                    'VALAKHOSRAVI0',
-                ]
-            },
-            {
                 title: 'ADDRESS:',
                 lines: [
                     'IRAN-TEHRAN',
