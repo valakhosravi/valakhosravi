@@ -1,16 +1,16 @@
-### Hi there 👋
+## Hi there, I'm Vala! 👋
 
-<!--
-**valakhosravi/valakhosravi** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+I'm a coding enthusiast who loves to build awesome applications that are not just functional, but also user-friendly and cool. From developing web and mobile apps to data engineering, I'm always up for a coding challenge.
 
-Here are some ideas to get you started:
+### 🌱 Skills
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+- Languages: JavaScript, Python, C#
+- Frameworks: React, Angular, Django, .Net
+- Tools: Git, Docker
+
+### 📫 Contact
+
+- LinkedIn: [Vala Khosravi](https://www.linkedin.com/in/vala-khosravi/)
+- Email: valakhosravi@outlook.com
+
+Feel free to connect with me and check out my projects! 😎
